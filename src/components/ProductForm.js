@@ -1,9 +1,10 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, CardItem, Item, Input, Button } from 'native-base';
 import { Text } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
-import { productUpdate, productCreate } from '../actions';
+import { productSave, productCreate } from '../actions';
 
 class ProductForm extends Component {
   constructor(props) {
@@ -16,7 +17,11 @@ class ProductForm extends Component {
   onButtonPress(values) {
     const { name, type, price } = values;
 
-    this.props.productCreate({ name, type, price });
+    if (_.get(this.props, 'product.uid', false)) {
+      this.props.productSave({ name, type, price, uid: this.props.product.uid });
+    } else {
+      this.props.productCreate({ name, type, price });
+    }
   }
 
   renderInput({ input, meta: { error } }) {
@@ -48,7 +53,7 @@ class ProductForm extends Component {
 
         <CardItem>
           <Button onPress={handleSubmit(this.onButtonPress)}>
-            <Text>Create</Text>
+            <Text>Submit</Text>
           </Button>
         </CardItem>
       </Card>
@@ -56,15 +61,18 @@ class ProductForm extends Component {
   }
 }
 
-const ProductFormRedux = reduxForm()(ProductForm);
-const mapStateToProps = state => {
-  return (
-    {
-      form: 'ProductForm',
-    }
-  );
+const ProductFormRedux = reduxForm({ form: 'ProductForm' })(ProductForm);
+const mapStateToProps = (state, ownProps) => {
+  if (ownProps.product) {
+    const { name, price, type } = ownProps.product;
+    return (
+      { initialValues: { name, price, type } }
+    );
+  }
+
+  return {};
 };
 
 export default connect(mapStateToProps, {
-  productUpdate, productCreate,
+  productSave, productCreate,
 })(ProductFormRedux);

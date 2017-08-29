@@ -1,16 +1,10 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import {
-  PRODUCT_UPDATE,
   PRODUCT_CREATE,
   PRODUCTS_FETCH_SUCCESS,
   PRODUCT_SAVE_SUCCESS,
 } from './types';
-
-export const productUpdate = ({ prop, value }) => ({
-  type: PRODUCT_UPDATE,
-  payload: { prop, value },
-});
 
 export const productCreate = ({ name, type, price }) => {
   const { currentUser } = firebase.auth();

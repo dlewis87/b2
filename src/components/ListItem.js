@@ -11,7 +11,7 @@ class ListItem extends Component {
   }
 
   onRowPress() {
-    Actions.productEdit({ product: this.props.product });
+    Actions.productView({ product: this.props.product });
   }
 
   render() {

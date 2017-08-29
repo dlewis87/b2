@@ -3,6 +3,7 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import ProductList from './components/ProductList';
 import ProductForm from './components/ProductForm';
+import ProductView from './components/ProductView';
 
 const RouterComponent = () => (
   <Router>
@@ -20,6 +21,7 @@ const RouterComponent = () => (
           initial
         />
         <Scene key="productCreate" component={ProductForm} title="Create Product" />
+        <Scene key="productView" component={ProductView} title="Product" />
         <Scene key="productEdit" component={ProductForm} title="Edit Product" />
       </Scene>
     </Scene>

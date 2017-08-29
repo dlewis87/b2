@@ -75,12 +75,11 @@ class LoginForm extends Component {
   }
 }
 
-const LoginFormRedux = reduxForm()(LoginForm);
+const LoginFormRedux = reduxForm({ form: 'LoginForm' })(LoginForm);
 const mapStateToProps = ({ auth }) => {
   const { error, loading } = auth;
 
   return {
-    form: 'LoginForm',
     authError: error,
     loading,
   };

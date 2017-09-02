@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { Divider } from 'react-native-elements';
 import {
   Container,
   Item,
@@ -10,7 +11,7 @@ import {
   Text,
   Spinner,
 } from 'native-base';
-import { loginUser } from '../actions';
+import { loginUser, loginSkip } from '../actions';
 
 const styles = {
   errorTextStyle: {
@@ -27,10 +28,15 @@ class LoginForm extends Component {
 
     this.renderInput = this.renderInput.bind(this);
     this.submit = this.submit.bind(this);
+    this.skip = this.skip.bind(this);
   }
 
   submit(values) {
     this.props.loginUser(values);
+  }
+
+  skip(values) {
+    this.props.loginSkip(values);
   }
 
   renderInput({ input, meta: { error } }) {
@@ -51,7 +57,7 @@ class LoginForm extends Component {
     }
 
     return (
-      <Button block primary onPress={handleSubmit(this.submit)}>
+      <Button primary rounder={false} full onPress={handleSubmit(this.submit)}>
         <Text>Login</Text>
       </Button>
     );
@@ -69,6 +75,10 @@ class LoginForm extends Component {
             {authError}
           </Text>
           {this.renderButton()}
+          <Divider style={{ backgroundColor: 'white' }} />
+          <Button success rounder={false} full onPress={this.skip}>
+            <Text>Skip Login</Text>
+          </Button>
         </Content>
       </Container>
     );
@@ -85,4 +95,6 @@ const mapStateToProps = ({ auth }) => {
   };
 };
 
-export default connect(mapStateToProps, { loginUser })(LoginFormRedux);
+export default connect(mapStateToProps, {
+  loginUser, loginSkip,
+})(LoginFormRedux);

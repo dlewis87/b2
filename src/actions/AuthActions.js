@@ -1,10 +1,10 @@
 import firebase from 'firebase';
-import { Actions } from 'react-native-router-flux';
 import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
 } from './types';
+import { mainNavigation } from './NavigationActions';
 
 
 const loginUserFail = (dispatch) => {
@@ -17,7 +17,7 @@ const loginUserSuccess = (dispatch, user) => {
     payload: user,
   });
 
-  Actions.main();
+  mainNavigation(dispatch);
 };
 
 export const loginUser = ({ email, password }) => (dispatch) => {
@@ -34,3 +34,10 @@ export const loginUser = ({ email, password }) => (dispatch) => {
     });
 };
 
+export const logoutUser = (dispatch) => {
+  // TODO: Logout function
+};
+
+export const loginSkip = (dispatch) => {
+  mainNavigation(dispatch);
+};

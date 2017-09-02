@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 import { Button, Card, CardItem } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 

@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import firebase from 'firebase';
 import reducers from './reducers';
-import Router from './Router';
+import { AppNavigator } from './navigators/AppNavigator';
 
 
 class App extends Component {
@@ -25,7 +25,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <Router />
+        <AppNavigator />
       </Provider>
     );
   }

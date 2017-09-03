@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import Template from '../components/Template';
+import ProductList from '../components/ProductList';
 
 const Home = () => <View style={{ paddingTop: 30 }}><Template placeholderText="Home" /></View>;
 const Me = () => <View style={{ paddingTop: 30 }}><Template placeholderText="Me" /></View>;
@@ -10,7 +11,7 @@ const Feed = () => <View style={{ paddingTop: 30 }}><Template placeholderText="F
 
 const Tabs = TabNavigator({
   Products: {
-    screen: Home,
+    screen: ProductList,
     navigationOptions: {
       tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => <Icon name="explore" size={35} color={tintColor} />,

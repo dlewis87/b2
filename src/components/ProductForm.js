@@ -17,7 +17,7 @@ class ProductForm extends Component {
   onButtonPress(values) {
     const { name, type, price } = values;
 
-    if (_.get(this.props, 'product.uid', false)) {
+    if (_.get(this.props, 'initialValues.uid', false)) {
       this.props.productSave({ name, type, price, uid: this.props.product.uid });
     } else {
       this.props.productCreate({ name, type, price });
@@ -62,11 +62,14 @@ class ProductForm extends Component {
 }
 
 const ProductFormRedux = reduxForm({ form: 'ProductForm' })(ProductForm);
-const mapStateToProps = (state, ownProps) => {
-  if (ownProps.product) {
-    const { name, price, type } = ownProps.product;
+const mapStateToProps = ({ currentProduct }) => {
+  if (currentProduct) {
+    const { name, price, type, uid } = currentProduct;
     return (
-      { initialValues: { name, price, type } }
+      {
+        initialValues: { name, price, type, uid },
+        product: { uid },
+      }
     );
   }
 

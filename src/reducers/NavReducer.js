@@ -3,6 +3,8 @@ import { AppNavigator } from '../navigators/AppNavigator';
 import {
   NAV_MAIN,
   NAV_LOGIN,
+  NAV_VIEW_PRODUCT,
+  NAV_EDIT_PRODUCT,
 } from '../actions/types';
 
 const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Login'));
@@ -24,6 +26,18 @@ const navReducer = (state = initialState, action) => {
     case NAV_LOGIN:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'Login' }),
+        state,
+      );
+      break;
+    case NAV_VIEW_PRODUCT:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'ViewProduct' }),
+        state,
+      );
+      break;
+    case NAV_EDIT_PRODUCT:
+      nextState = AppNavigator.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'EditProduct' }),
         state,
       );
       break;

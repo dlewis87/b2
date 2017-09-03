@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 import { CardItem } from 'native-base';
+import { productView } from '../actions';
+
+const styles = {
+  titleStyle: {
+    fontSize: 18,
+    paddingLeft: 15,
+  },
+};
 
 class ListItem extends Component {
   constructor(props) {
@@ -11,7 +19,7 @@ class ListItem extends Component {
   }
 
   onRowPress() {
-    Actions.productView({ product: this.props.product });
+    this.props.productView(this.props.product);
   }
 
   render() {
@@ -31,11 +39,4 @@ class ListItem extends Component {
   }
 }
 
-const styles = {
-  titleStyle: {
-    fontSize: 18,
-    paddingLeft: 15,
-  },
-};
-
-export default ListItem;
+export default connect(null, { productView })(ListItem);

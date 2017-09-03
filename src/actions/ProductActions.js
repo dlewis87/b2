@@ -1,10 +1,15 @@
 import firebase from 'firebase';
-import { Actions } from 'react-native-router-flux';
 import {
   PRODUCT_CREATE,
   PRODUCTS_FETCH_SUCCESS,
   PRODUCT_SAVE_SUCCESS,
+  CURRENT_PRODUCT_SET,
 } from './types';
+import {
+  viewProductNavigation,
+  editProductNavigation,
+  mainNavigation,
+} from './NavigationActions';
 
 export const productCreate = ({ name, type, price }) => {
   const { currentUser } = firebase.auth();
@@ -15,7 +20,8 @@ export const productCreate = ({ name, type, price }) => {
       .catch((error) => { console.log(error); })
       .then(() => {
         dispatch({ type: PRODUCT_CREATE });
-        Actions.main({ type: 'reset' });
+        // TODO: should go back to view product with cleared stack
+        mainNavigation(dispatch);
       });
   };
 };
@@ -39,11 +45,13 @@ export const productSave = ({ name, type, price, uid }) => {
       .set({ name, type, price })
       .then(() => {
         dispatch({ type: PRODUCT_SAVE_SUCCESS });
-        Actions.main({ type: 'reset' });
+        // TODO: should go back to view product with cleared stack
+        mainNavigation(dispatch);
       });
   };
 };
 
+// TODO: Implement this function
 export const productDelete = ({ uid }) => {
   const { currentUser } = firebase.auth();
 
@@ -54,4 +62,18 @@ export const productDelete = ({ uid }) => {
         Actions.main({ type: 'reset' });
       });
   };
+};
+
+const currentProductSet = (dispatch, product) => {
+  dispatch({ type: CURRENT_PRODUCT_SET, payload: product });
+};
+
+export const productView = product => (dispatch) => {
+  currentProductSet(dispatch, product);
+  viewProductNavigation(dispatch);
+};
+
+export const productEdit = product => (dispatch) => {
+  currentProductSet(dispatch, product);
+  editProductNavigation(dispatch);
 };

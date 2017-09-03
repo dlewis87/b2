@@ -9,7 +9,6 @@ import ListItem from './ListItem';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 25,
   },
 });
 
@@ -25,12 +24,12 @@ class ProductList extends Component {
     this.createDataSource(nextProps);
   }
 
-  createDataSource({ product }) {
+  createDataSource({ products }) {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
 
-    this.dataSource = ds.cloneWithRows(product);
+    this.dataSource = ds.cloneWithRows(products);
   }
 
   renderRow(product) {
@@ -50,9 +49,9 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const product = _.map(state.product, (val, uid) => ({ ...val, uid }));
+  const products = _.map(state.products, (val, uid) => ({ ...val, uid }));
 
-  return { product };
+  return { products };
 };
 
 export default connect(mapStateToProps, { productsFetch })(ProductList);

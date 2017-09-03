@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Text } from 'react-native';
 import { Button, Card, CardItem } from 'native-base';
-import { Actions } from 'react-native-router-flux';
+import { productEdit } from '../actions';
 
 class ProductView extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class ProductView extends Component {
   }
 
   onButtonPress() {
-    Actions.productEdit({ product: this.props.product });
+    this.props.productEdit(this.props.product);
   }
 
   render() {
@@ -41,4 +42,5 @@ class ProductView extends Component {
   }
 }
 
-export default ProductView;
+const mapStateToProps = ({ currentProduct }) => ({ product: currentProduct });
+export default connect(mapStateToProps, { productEdit })(ProductView);

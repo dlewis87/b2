@@ -12,7 +12,12 @@ const navReducer = (state = initialState, action) => {
   switch (action.type) {
     case NAV_MAIN:
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: 'Main' }),
+        NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Main' }),
+          ],
+        }),
         state,
       );
       break;

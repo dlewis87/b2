@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import firebase from 'firebase';
 import reducers from './reducers';
-import { AppNavigator } from './navigators/AppNavigator';
+import AppNavigator from './navigators/AppNavigator';
 
 
 class App extends Component {

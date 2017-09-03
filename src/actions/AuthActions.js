@@ -34,10 +34,10 @@ export const loginUser = ({ email, password }) => (dispatch) => {
     });
 };
 
-export const logoutUser = (dispatch) => {
+export const logoutUser = () => () => {
   // TODO: Logout function
 };
 
-export const loginSkip = (dispatch) => {
+export const loginSkip = () => (dispatch) => {
   mainNavigation(dispatch);
 };

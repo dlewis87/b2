@@ -35,8 +35,8 @@ class LoginForm extends Component {
     this.props.loginUser(values);
   }
 
-  skip(values) {
-    this.props.loginSkip(values);
+  skip() {
+    this.props.loginSkip();
   }
 
   renderInput({ input, meta: { error } }) {
@@ -57,7 +57,7 @@ class LoginForm extends Component {
     }
 
     return (
-      <Button primary rounder={false} full onPress={handleSubmit(this.submit)}>
+      <Button full primary rounded={false} onPress={handleSubmit(this.submit)}>
         <Text>Login</Text>
       </Button>
     );
@@ -76,7 +76,7 @@ class LoginForm extends Component {
           </Text>
           {this.renderButton()}
           <Divider style={{ backgroundColor: 'white' }} />
-          <Button success rounder={false} full onPress={this.skip}>
+          <Button full success rounded={false} onPress={this.skip}>
             <Text>Skip Login</Text>
           </Button>
         </Content>
@@ -85,11 +85,12 @@ class LoginForm extends Component {
   }
 }
 
-const LoginFormRedux = reduxForm({ form: 'LoginForm' })(LoginForm);
+const LoginFormRedux = reduxForm()(LoginForm);
 const mapStateToProps = ({ auth }) => {
   const { error, loading } = auth;
 
   return {
+    form: 'LoginForm',
     authError: error,
     loading,
   };

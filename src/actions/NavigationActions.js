@@ -9,7 +9,7 @@ export const mainNavigation = (dispatch) => {
   dispatch({ type: NAV_MAIN });
 };
 
-export const loginNavigation = (dispatch) => {
+export const loginNavigation = () => (dispatch) =>{
   dispatch({ type: NAV_LOGIN });
 };
 

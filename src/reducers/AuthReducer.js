@@ -1,8 +1,8 @@
 import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
-  LOGIN_USER,
-} from '../actions/types';
+  LOGIN_USER, LOGOUT_USER_SUCCESS,
+} from '../actions/types'
 
 const INITIAL_STATE = {
   email: '',
@@ -21,6 +21,12 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         ...INITIAL_STATE,
         user: action.payload,
+      };
+    case LOGOUT_USER_SUCCESS:
+      return {
+        ...state,
+        ...INITIAL_STATE,
+        user: null,
       };
     case LOGIN_USER_FAIL:
       return {

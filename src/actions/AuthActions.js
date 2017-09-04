@@ -3,6 +3,7 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER,
+  LOGOUT_USER_SUCCESS,
 } from './types';
 import { mainNavigation } from './NavigationActions';
 
@@ -20,13 +21,22 @@ const loginUserSuccess = (dispatch, user) => {
   mainNavigation(dispatch);
 };
 
+const logoutUserSuccess = (dispatch) => {
+  dispatch({
+    type: LOGOUT_USER_SUCCESS,
+  });
+
+  mainNavigation(dispatch);
+};
+
+
 export const loginUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: LOGIN_USER });
 
   firebase.auth().signInWithEmailAndPassword(email, password)
     .then(user => loginUserSuccess(dispatch, user))
     .catch((error) => {
-      console.log(error);
+      console.log('loginUser error', error);
 
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(user => loginUserSuccess(dispatch, user))
@@ -34,8 +44,13 @@ export const loginUser = ({ email, password }) => (dispatch) => {
     });
 };
 
-export const logoutUser = () => () => {
-  // TODO: Logout function
+export const logoutUser = () => (dispatch) => {
+  firebase.auth().signOut()
+    .then(() => logoutUserSuccess(dispatch))
+    .catch((error) => {
+      console.log('logoutUser error', error);
+      // TODO: Send error to UI
+    });
 };
 
 export const loginSkip = () => (dispatch) => {

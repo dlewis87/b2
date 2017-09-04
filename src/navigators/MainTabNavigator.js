@@ -1,31 +1,30 @@
 import React from 'react';
-import { View } from 'react-native';
+// import { View } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
-import Template from '../components/Template';
 import ProductList from '../components/ProductList';
+import ProductForm from '../components/ProductForm';
+import UserProfile from '../components/UserProfile';
 
-const Home = () => <View style={{ paddingTop: 30 }}><Template placeholderText="Home" /></View>;
-const Me = () => <View style={{ paddingTop: 30 }}><Template placeholderText="Me" /></View>;
-const Feed = () => <View style={{ paddingTop: 30 }}><Template placeholderText="Feed" /></View>;
+// const Me = () => <View style={{ paddingTop: 30 }}><Template placeholderText="Me" /></View>;
 
 const Tabs = TabNavigator({
   Products: {
     screen: ProductList,
     navigationOptions: {
       tabBarLabel: 'Home',
-      tabBarIcon: ({ tintColor }) => <Icon name="explore" size={35} color={tintColor} />,
+      tabBarIcon: ({ tintColor }) => <Icon name="search" size={35} color={tintColor} />,
     },
   },
-  Feed: {
-    screen: Feed,
+  Add: {
+    screen: ProductForm,
     navigationOptions: {
       tabBarLabel: 'Feed',
-      tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />,
+      tabBarIcon: ({ tintColor }) => <Icon name="add-circle-outline" size={35} color={tintColor} />,
     },
   },
   Me: {
-    screen: Me,
+    screen: UserProfile,
     navigationOptions: {
       tabBarLabel: 'Me',
       tabBarIcon: ({ tintColor }) => <Icon name="account-circle" size={35} color={tintColor} />,

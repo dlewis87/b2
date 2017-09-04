@@ -15,8 +15,8 @@ export const productCreate = ({ name, type, price }) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
-    firebase.database().ref(`/users/${currentUser.uid}/products`)
-      .push({ name, type, price })
+    firebase.database().ref('/products')
+      .push({ name, type, price, uid: currentUser.uid })
       .catch((error) => { console.log(error); })
       .then(() => {
         dispatch({ type: PRODUCT_CREATE });
@@ -27,21 +27,31 @@ export const productCreate = ({ name, type, price }) => {
 };
 
 export const productsFetch = () => {
-  const { currentUser } = firebase.auth();
 
   return (dispatch) => {
-    firebase.database().ref(`/users/${currentUser.uid}/products`)
+    firebase.database().ref('/products')
       .on('value', (snapshot) => {
         dispatch({ type: PRODUCTS_FETCH_SUCCESS, payload: snapshot.val() });
       });
   };
 };
 
+// TODO: implement function
+// export const userProductsFetch = () => {
+//   const { currentUser } = firebase.auth();
+//
+//   return (dispatch) => {
+//     firebase.database().ref(`/users/${currentUser.uid}/products`)
+//       .on('value', (snapshot) => {
+//         dispatch({ type: PRODUCTS_FETCH_SUCCESS, payload: snapshot.val() });
+//       });
+//   };
+// };
+
 export const productSave = ({ name, type, price, uid }) => {
-  const { currentUser } = firebase.auth();
 
   return (dispatch) => {
-    firebase.database().ref(`/users/${currentUser.uid}/products/${uid}`)
+    firebase.database().ref(`/products/${uid}`)
       .set({ name, type, price })
       .then(() => {
         dispatch({ type: PRODUCT_SAVE_SUCCESS });

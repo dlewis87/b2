@@ -15,7 +15,7 @@ export const productCreate = ({ name, type, price }) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
-    firebase.database().ref('/products')
+    firebase.database().ref('products')
       .push({ name, type, price, uid: currentUser.uid })
       .catch((error) => { console.log(error); })
       .then(() => {
@@ -51,7 +51,7 @@ export const productsFetch = () => {
 export const productSave = ({ name, type, price, uid }) => {
 
   return (dispatch) => {
-    firebase.database().ref(`/products/${uid}`)
+    firebase.database().ref(`products/${uid}`)
       .set({ name, type, price })
       .then(() => {
         dispatch({ type: PRODUCT_SAVE_SUCCESS });

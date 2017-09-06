@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text } from 'react-native';
+import { Text, Image } from 'react-native';
 import {
   Button,
   Card,
@@ -11,7 +11,7 @@ import {
   Left,
   Thumbnail,
   Body,
-  Image,
+  // Image,
   Icon,
   Right,
 } from 'native-base';
@@ -33,19 +33,27 @@ class ProductView extends Component {
 
     return (
       <Container>
-        <Header />
         <Content>
           <Card>
             <CardItem>
               <Left>
                 {/*<Thumbnail source={{ uri: 'https://cdn.pixabay.com/photo/2011/01/05/23/29/baboons-4371_960_720.jpg' }} />*/}
+                <Image
+                  style={{ height: 50, width: null, flex: 1 }}
+                  source={{ uri: 'https://ichef.bbci.co.uk/images/ic/1200x675/p01m2125.jpg' }}
+                />
                 <Body>
-                  <Text>NativeBase</Text>
-                  <Text note>GeekyAnts</Text>
+                  <Text>{name}</Text>
+                  <Text note>{type}</Text>
+                  <Text note>{price}</Text>
                 </Body>
               </Left>
             </CardItem>
             <CardItem cardBody>
+              <Image
+                style={{ height: 200, width: null, flex: 1 }}
+                source={{ uri: 'https://cdn.pixabay.com/photo/2011/01/05/23/29/baboons-4371_960_720.jpg' }}
+              />
               {/*<Image source={{ uri: 'https://cdn.pixabay.com/photo/2011/01/05/23/29/baboons-4371_960_720.jpg' }} style={{ height: 200, width: null, flex: 1 }} />*/}
             </CardItem>
             <CardItem>
@@ -64,6 +72,13 @@ class ProductView extends Component {
               <Right>
                 <Text>11h ago</Text>
               </Right>
+            </CardItem>
+          </Card>
+          <Card>
+            <CardItem>
+              <Button full success rounded={false} onPress={this.onButtonPress}>
+                <Text>Edit Product</Text>
+              </Button>
             </CardItem>
           </Card>
         </Content>

@@ -1,17 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, StyleSheet } from 'react-native';
+import { ListView } from 'react-native';
 import { productsFetch } from '../actions';
 import ListItem from './ListItem';
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
 
 class ProductList extends Component {
   componentWillMount() {
@@ -39,7 +31,6 @@ class ProductList extends Component {
   render() {
     return (
       <ListView
-        contentContainerStyle={styles.container}
         enableEmptySections
         dataSource={this.dataSource}
         renderRow={this.renderRow}

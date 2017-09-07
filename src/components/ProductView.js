@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, Image } from 'react-native';
+import { Text, Image, Modal } from 'react-native';
 import {
   Button,
   Card,
@@ -16,16 +16,33 @@ import {
   Right,
 } from 'native-base';
 import { productEdit } from '../actions';
+import MessageForm from './MessageForm';
+
+const styles = {
+  buttonContainerStyles: {
+    flex: 1,
+    justifyContent: 'space-around',
+  },
+};
 
 class ProductView extends Component {
+  state = {
+    showMessageModal: false,
+  };
+
   constructor(props) {
     super(props);
 
-    this.onButtonPress = this.onButtonPress.bind(this);
+    this.editProduct = this.editProduct.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
   }
 
-  onButtonPress() {
+  editProduct() {
     this.props.productEdit(this.props.product);
+  }
+
+  sendMessage(visible) {
+    this.setState({ showMessageModal: visible });
   }
 
   render() {
@@ -37,7 +54,7 @@ class ProductView extends Component {
           <Card>
             <CardItem>
               <Left>
-                {/*<Thumbnail source={{ uri: 'https://cdn.pixabay.com/photo/2011/01/05/23/29/baboons-4371_960_720.jpg' }} />*/}
+                {/* <Thumbnail source={{ uri: 'https://cdn.pixabay.com/photo/2011/01/05/23/29/baboons-4371_960_720.jpg' }} /> */}
                 <Image
                   style={{ height: 50, width: null, flex: 1 }}
                   source={{ uri: 'https://ichef.bbci.co.uk/images/ic/1200x675/p01m2125.jpg' }}
@@ -54,7 +71,7 @@ class ProductView extends Component {
                 style={{ height: 200, width: null, flex: 1 }}
                 source={{ uri: 'https://cdn.pixabay.com/photo/2011/01/05/23/29/baboons-4371_960_720.jpg' }}
               />
-              {/*<Image source={{ uri: 'https://cdn.pixabay.com/photo/2011/01/05/23/29/baboons-4371_960_720.jpg' }} style={{ height: 200, width: null, flex: 1 }} />*/}
+              {/* <Image source={{ uri: 'https://cdn.pixabay.com/photo/2011/01/05/23/29/baboons-4371_960_720.jpg' }} style={{ height: 200, width: null, flex: 1 }} /> */}
             </CardItem>
             <CardItem>
               <Left>
@@ -75,13 +92,25 @@ class ProductView extends Component {
             </CardItem>
           </Card>
           <Card>
-            <CardItem>
-              <Button full success rounded={false} onPress={this.onButtonPress}>
+            <CardItem style={styles.buttonContainerStyles}>
+              <Button full success rounded={false} onPress={this.editProduct}>
                 <Text>Edit Product</Text>
+              </Button>
+              <Button full primary rounded={false} onPress={() => { this.sendMessage(true); }}>
+                <Text>Send Message</Text>
               </Button>
             </CardItem>
           </Card>
         </Content>
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.showMessageModal}
+        >
+          <MessageForm
+            sendMessage={this.sendMessage}
+          />
+        </Modal>
       </Container>
     );
   }

@@ -15,3 +15,9 @@ export const PRODUCT_CREATE = 'product_create';
 export const PRODUCTS_FETCH_SUCCESS = 'products_fetch_success';
 export const PRODUCT_SAVE_SUCCESS = 'product_save_success';
 export const CURRENT_PRODUCT_SET = 'current_product_set';
+
+// Message Actions
+export const MESSAGE_CREATE = 'message_create';
+export const MESSAGES_FETCH_SUCCESS = 'messages_fetch_success';
+export const MESSAGE_SAVE_SUCCESS = 'message_save_success';
+export const CURRENT_MESSAGE_SET = 'current_message_set';

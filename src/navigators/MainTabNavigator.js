@@ -6,24 +6,31 @@ import ProductForm from '../components/ProductForm';
 import UserProfile from '../components/UserProfile';
 
 const Tabs = TabNavigator({
-  Products: {
+  Home: {
     screen: ProductList,
     navigationOptions: {
       tabBarLabel: 'Home',
-      tabBarIcon: ({ tintColor }) => <Icon name="search" size={35} color={tintColor} />,
+      tabBarIcon: ({ tintColor }) => <Icon name="home" size={35} color={tintColor} />,
     },
   },
   Add: {
     screen: ProductForm,
     navigationOptions: {
-      tabBarLabel: 'Feed',
+      tabBarLabel: 'Add',
       tabBarIcon: ({ tintColor }) => <Icon name="add-circle-outline" size={35} color={tintColor} />,
     },
   },
-  Me: {
+  Messages: {
     screen: UserProfile,
     navigationOptions: {
-      tabBarLabel: 'Me',
+      tabBarLabel: 'Messages',
+      tabBarIcon: ({ tintColor }) => <Icon name="mail-outline" size={35} color={tintColor} />,
+    },
+  },
+  Profile: {
+    screen: UserProfile,
+    navigationOptions: {
+      tabBarLabel: 'Profile',
       tabBarIcon: ({ tintColor }) => <Icon name="account-circle" size={35} color={tintColor} />,
     },
   },

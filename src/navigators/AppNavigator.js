@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 import Tabs from './MainTabNavigator';
 import LoginForm from '../components/LoginForm';
@@ -27,4 +27,4 @@ const mapStateToProps = state => ({
   nav: state.nav,
 });
 
-export default connect(mapStateToProps)(AppWithNavigationState);
+export const AppWithNavigationStateContainer = connect(mapStateToProps)(AppWithNavigationState);

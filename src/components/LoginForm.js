@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Divider } from 'react-native-elements';
@@ -84,6 +85,14 @@ class LoginForm extends Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  loginSkip: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  authError: PropTypes.string.isRequired,
+};
 
 const LoginFormRedux = reduxForm()(LoginForm);
 const mapStateToProps = ({ auth }) => {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 import { Button } from 'native-base';
@@ -33,5 +34,10 @@ class UserProfile extends Component {
     );
   }
 }
+
+UserProfile.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  loginNavigation: PropTypes.func.isRequired,
+};
 
 export default connect(null, { logoutUser, loginNavigation })(UserProfile);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, Image, Modal } from 'react-native';
 import {
@@ -6,10 +7,10 @@ import {
   Card,
   CardItem,
   Container,
-  Header,
+  // Header,
   Content,
   Left,
-  Thumbnail,
+  // Thumbnail,
   Body,
   // Image,
   Icon,
@@ -26,12 +27,11 @@ const styles = {
 };
 
 class ProductView extends Component {
-  state = {
-    showMessageModal: false,
-  };
-
   constructor(props) {
     super(props);
+    this.state = {
+      showMessageModal: false,
+    };
 
     this.editProduct = this.editProduct.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -115,6 +115,15 @@ class ProductView extends Component {
     );
   }
 }
+
+ProductView.propTypes = {
+  productEdit: PropTypes.func.isRequired,
+  product: PropTypes.shape({
+    name: PropTypes.string,
+    type: PropTypes.string,
+    price: PropTypes.string,
+  }).isRequired,
+};
 
 const mapStateToProps = ({ currentProduct }) => ({ product: currentProduct });
 export default connect(mapStateToProps, { productEdit })(ProductView);

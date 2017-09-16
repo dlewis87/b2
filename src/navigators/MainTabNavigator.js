@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements';
 import ProductList from '../components/ProductList';
 import ProductForm from '../components/ProductForm';
 import UserProfile from '../components/UserProfile';
+import MessagesList from '../components/MessagesList';
 
 const Tabs = TabNavigator({
   Home: {
@@ -21,7 +22,7 @@ const Tabs = TabNavigator({
     },
   },
   Messages: {
-    screen: UserProfile,
+    screen: MessagesList,
     navigationOptions: {
       tabBarLabel: 'Messages',
       tabBarIcon: ({ tintColor }) => <Icon name="mail-outline" size={35} color={tintColor} />,

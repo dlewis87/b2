@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, TouchableWithoutFeedback, Image } from 'react-native';
 import {
@@ -6,7 +7,7 @@ import {
   Card,
   CardItem,
   Container,
-  Header,
+  // Header,
   Content,
   Left,
   // Thumbnail,
@@ -55,7 +56,7 @@ class ListItem extends Component {
             <Card>
               <CardItem>
                 <Left>
-                  {/*<Thumbnail source={{ uri: 'https://cdn.pixabay.com/photo/2011/01/05/23/29/baboons-4371_960_720.jpg' }} />*/}
+                  {/* <Thumbnail source={{ uri: 'https://cdn.pixabay.com/photo/2011/01/05/23/29/baboons-4371_960_720.jpg' }} /> */}
                   <Image
                     style={{ height: 50, width: null, flex: 1 }}
                     source={{ uri: 'https://ichef.bbci.co.uk/images/ic/1200x675/p01m2125.jpg' }}
@@ -72,7 +73,7 @@ class ListItem extends Component {
                   style={{ height: 200, width: null, flex: 1 }}
                   source={{ uri: this.randImage() }}
                 />
-                {/*<Image source={{ uri: 'https://cdn.pixabay.com/photo/2011/01/05/23/29/baboons-4371_960_720.jpg' }} style={{ height: 200, width: null, flex: 1 }} />*/}
+                {/* <Image source={{ uri: 'https://cdn.pixabay.com/photo/2011/01/05/23/29/baboons-4371_960_720.jpg' }} style={{ height: 200, width: null, flex: 1 }} /> */}
               </CardItem>
               <CardItem>
                 <Left>
@@ -98,5 +99,14 @@ class ListItem extends Component {
     );
   }
 }
+
+ListItem.propTypes = {
+  productView: PropTypes.func.isRequired,
+  product: PropTypes.shape({
+    name: PropTypes.string,
+    type: PropTypes.string,
+    price: PropTypes.string,
+  }).isRequired,
+};
 
 export default connect(null, { productView })(ListItem);

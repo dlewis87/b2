@@ -1,34 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
-import firebase from 'firebase';
+import { createLogger } from 'redux-logger';
 import reducers from './reducers';
-import AppNavigator from './navigators/AppNavigator';
+import { AppWithNavigationStateContainer } from './navigators/AppNavigator';
 
-
-class App extends Component {
-  componentWillMount() {
-    const config = {
-      apiKey: 'AIzaSyCuDWNDyk9WUwLqsT2H7y17BMv_y5vs_5k',
-      authDomain: 'btse2-31417.firebaseapp.com',
-      databaseURL: 'https://btse2-31417.firebaseio.com',
-      projectId: 'btse2-31417',
-      storageBucket: 'btse2-31417.appspot.com',
-      messagingSenderId: '151504074200',
-    };
-    firebase.initializeApp(config);
-  }
-
-  render() {
-    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
-
-    return (
-      <Provider store={store}>
-        <AppNavigator />
-      </Provider>
-    );
-  }
-}
+const App = () => {
+  const logger = createLogger();
+  const store = createStore(reducers, {}, applyMiddleware(ReduxThunk, logger));
+  return (
+    <Provider store={store}>
+      <AppWithNavigationStateContainer />
+    </Provider>
+  );
+};
 
 export default App;

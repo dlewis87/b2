@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Card, CardItem, Item, Input, Button } from 'native-base';
 import { Text } from 'react-native';
@@ -60,6 +61,13 @@ class ProductForm extends Component {
     );
   }
 }
+
+ProductForm.propTypes = {
+  productCreate: PropTypes.func.isRequired,
+  productSave: PropTypes.func.isRequired,
+  product: PropTypes.obj,
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 const ProductFormRedux = reduxForm({ form: 'ProductForm' })(ProductForm);
 const mapStateToProps = ({ currentProduct }) => {

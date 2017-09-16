@@ -3,12 +3,14 @@ import { reducer as form } from 'redux-form';
 import AuthReducer from './AuthReducer';
 import ProductsReducer from './ProductsReducer';
 import NavReducer from './NavReducer';
-import CurrenctProductReducer from './CurrentProductReducer';
+import CurrentProductReducer from './CurrentProductReducer';
+import MessagesReducer from './MessagesReducer';
 
 export default combineReducers({
   auth: AuthReducer,
   nav: NavReducer,
   form,
   products: ProductsReducer,
-  currentProduct: CurrenctProductReducer,
+  messages: MessagesReducer,
+  currentProduct: CurrentProductReducer,
 });

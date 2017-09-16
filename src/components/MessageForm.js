@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { View, Text, TouchableHighlight } from 'react-native';
-import { Card, CardItem, Button, Item, Input } from 'native-base';
+import { Text } from 'react-native';
+import { Card, CardItem, Button, Item, Input, Container, Header, Content } from 'native-base';
 import { Field, reduxForm } from 'redux-form';
+import { messageCreate } from '../actions';
 
 const styles = {
   buttonContainerStyles: {
@@ -17,18 +19,15 @@ class MessageForm extends Component {
 
     this.sendMessage = this.sendMessage.bind(this);
     this.closeMessage = this.closeMessage.bind(this);
-    this.onButtonPress = this.onButtonPress(this);
-  }
-
-  onButtonPress(values) {
   }
 
   closeMessage() {
-    // this.props.sendMessage(false);
+    this.props.sendMessage(false);
   }
 
-  sendMessage() {
-    // this.props.sendMessage(false);
+  sendMessage({ subject, content }) {
+    this.props.messageCreate({ subject, content, productId: this.props.product.uid });
+    this.props.sendMessage(false);
   }
 
   renderInput({ input, meta: { error } }) {
@@ -45,45 +44,59 @@ class MessageForm extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <View style={{ marginTop: 22 }}>
-        <View>
+      <Container>
+        <Header />
+        <Content>
           <Card>
             <CardItem>
-              <Field name="name" component={this.renderInput} />
+              <Field name="subject" component={this.renderInput} />
             </CardItem>
 
             <CardItem>
-              <Field name="type" component={this.renderInput} />
-            </CardItem>
-
-            <CardItem>
-              <Field name="price" component={this.renderInput} />
-            </CardItem>
-
-            <CardItem>
-              {/*<Button onPress={handleSubmit(this.onButtonPress)}>*/}
-                {/*<Text>Submit</Text>*/}
-              {/*</Button>*/}
+              <Field name="content" component={this.renderInput} />
             </CardItem>
           </Card>
           <Card>
             <CardItem style={styles.buttonContainerStyles}>
-              <Button full success rounded={false} onPress={this.sendMessage}>
-                <Text>Edit Product</Text>
+              <Button full success rounded={false} onPress={handleSubmit(this.sendMessage)}>
+                <Text>Send Message</Text>
               </Button>
               <Button full primary rounded={false} onPress={this.closeMessage}>
-                <Text>Send Message</Text>
+                <Text>Close</Text>
               </Button>
             </CardItem>
           </Card>
-          <TouchableHighlight >
-            <Text>Hide Modal</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
+        </Content>
+      </Container>
     );
   }
 }
 
+MessageForm.propTypes = {
+  sendMessage: PropTypes.func.isRequired,
+  messageCreate: PropTypes.func.isRequired,
+  product: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    uid: PropTypes.string.isRequired,
+  }),
+  handleSubmit: PropTypes.func.isRequired,
+};
+
 const MessageFormRedux = reduxForm({ form: 'MessageForm' })(MessageForm);
-export default connect()(MessageFormRedux);
+const mapStateToProps = ({ currentProduct }) => {
+  if (currentProduct) {
+    const { uid } = currentProduct;
+    return (
+      {
+        product: { uid },
+      }
+    );
+  }
+
+  return {};
+};
+export default connect(mapStateToProps, {
+  messageCreate,
+})(MessageFormRedux);

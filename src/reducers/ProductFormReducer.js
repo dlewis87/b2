@@ -1,6 +1,6 @@
 import {
   PRODUCT_UPDATE,
-  PRODUCT_CREATE,
+  PRODUCT_CREATE_SUCCESS,
   PRODUCT_SAVE_SUCCESS,
 } from '../actions/types';
 
@@ -17,7 +17,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         [action.payload.prop]: action.payload.value,
       };
-    case PRODUCT_CREATE:
+    case PRODUCT_CREATE_SUCCESS:
       return INITIAL_STATE;
     case PRODUCT_SAVE_SUCCESS:
       return INITIAL_STATE;

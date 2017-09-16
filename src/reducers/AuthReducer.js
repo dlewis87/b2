@@ -2,7 +2,7 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER, LOGOUT_USER_SUCCESS,
-} from '../actions/types'
+} from '../actions/types';
 
 const INITIAL_STATE = {
   email: '',

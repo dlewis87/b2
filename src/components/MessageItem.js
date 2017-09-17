@@ -36,9 +36,8 @@ class MessageItem extends Component {
 MessageItem.propTypes = {
   message: PropTypes.shape({
     content: PropTypes.string.isRequired,
-    subject: PropTypes.strign.isRequired,
+    subject: PropTypes.string.isRequired,
   }).isRequired,
-  content: PropTypes.string.isRequired,
 };
 
 export default connect()(MessageItem);

@@ -62,10 +62,14 @@ class ProductForm extends Component {
   }
 }
 
+ProductForm.defaultProps = {
+  product: {},
+};
+
 ProductForm.propTypes = {
   productCreate: PropTypes.func.isRequired,
   productSave: PropTypes.func.isRequired,
-  product: PropTypes.obj,
+  product: PropTypes.object,
   handleSubmit: PropTypes.func.isRequired,
 };
 

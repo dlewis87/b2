@@ -72,13 +72,14 @@ class MessageForm extends Component {
   }
 }
 
+MessageForm.defaultProps = {
+  product: {},
+};
+
 MessageForm.propTypes = {
   sendMessage: PropTypes.func.isRequired,
   messageCreate: PropTypes.func.isRequired,
   product: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
     uid: PropTypes.string.isRequired,
   }),
   handleSubmit: PropTypes.func.isRequired,
@@ -87,10 +88,9 @@ MessageForm.propTypes = {
 const MessageFormRedux = reduxForm({ form: 'MessageForm' })(MessageForm);
 const mapStateToProps = ({ currentProduct }) => {
   if (currentProduct) {
-    const { uid } = currentProduct;
     return (
       {
-        product: { uid },
+        product: { uid: currentProduct.uid },
       }
     );
   }

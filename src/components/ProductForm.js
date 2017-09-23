@@ -41,14 +41,17 @@ class ProductForm extends Component {
     return (
       <Card>
         <CardItem>
+          <Text>Name:</Text>
           <Field name="name" component={this.renderInput} />
         </CardItem>
 
         <CardItem>
+          <Text>Type:</Text>
           <Field name="type" component={this.renderInput} />
         </CardItem>
 
         <CardItem>
+          <Text>Price:</Text>
           <Field name="price" component={this.renderInput} />
         </CardItem>
 

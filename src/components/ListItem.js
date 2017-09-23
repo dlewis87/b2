@@ -62,9 +62,9 @@ class ListItem extends Component {
                     source={{ uri: 'https://ichef.bbci.co.uk/images/ic/1200x675/p01m2125.jpg' }}
                   />
                   <Body>
-                    <Text>{name}</Text>
-                    <Text note>{type}</Text>
-                    <Text note>{price}</Text>
+                    <Text>Name: {name}</Text>
+                    <Text note>Type: {type}</Text>
+                    <Text note>Price: {price}</Text>
                   </Body>
                 </Left>
               </CardItem>

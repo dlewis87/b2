@@ -49,10 +49,12 @@ class MessageForm extends Component {
         <Content>
           <Card>
             <CardItem>
+              <Text>Subject</Text>
               <Field name="subject" component={this.renderInput} />
             </CardItem>
 
             <CardItem>
+              <Text>Content</Text>
               <Field name="content" component={this.renderInput} />
             </CardItem>
           </Card>

@@ -70,7 +70,9 @@ class LoginForm extends Component {
     return (
       <Container>
         <Content padder>
+          <Text>Email</Text>
           <Field name="email" component={this.renderInput} />
+          <Text>Password</Text>
           <Field name="password" component={this.renderInput} />
           <Text style={styles.errorTextStyle}>
             {authError}

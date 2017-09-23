@@ -20,15 +20,13 @@ class MessageItem extends Component {
     const { subject, content } = this.props.message;
 
     return (
-      <TouchableWithoutFeedback>
-        <View>
-          <CardItem>
-            <Text style={styles.titleStyle}>
-              {subject} - {content}
-            </Text>
-          </CardItem>
-        </View>
-      </TouchableWithoutFeedback>
+      <View>
+        <CardItem>
+          <Text style={styles.titleStyle}>
+            {subject} - {content}
+          </Text>
+        </CardItem>
+      </View>
     );
   }
 }

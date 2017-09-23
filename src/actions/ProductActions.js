@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import { currentUser, productsRef } from './database';
+import { auth, productsRef } from './database';
 import {
   PRODUCT_CREATE_SUCCESS,
   PRODUCTS_FETCH_SUCCESS,
@@ -13,6 +13,8 @@ import {
 } from './NavigationActions';
 
 export const productCreate = ({ name, type, price }) => (dispatch) => {
+  const { currentUser } = auth;
+
   productsRef
     .push({ name, type, price, uid: currentUser.uid })
     .catch((error) => { console.log(error); })

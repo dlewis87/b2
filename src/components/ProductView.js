@@ -18,6 +18,7 @@ import {
 } from 'native-base';
 import { productEdit } from '../actions';
 import MessageForm from './MessageForm';
+import MessageList from './MessagesList';
 
 const styles = {
   buttonContainerStyles: {
@@ -46,7 +47,7 @@ class ProductView extends Component {
   }
 
   render() {
-    const { name, type, price } = this.props.product;
+    const { name, type, price, uid } = this.props.product;
 
     return (
       <Container>
@@ -101,6 +102,9 @@ class ProductView extends Component {
               </Button>
             </CardItem>
           </Card>
+          <Card>
+            <MessageList productId={uid} />
+          </Card>
         </Content>
         <Modal
           animationType="slide"
@@ -122,6 +126,7 @@ ProductView.propTypes = {
     name: PropTypes.string,
     type: PropTypes.string,
     price: PropTypes.string,
+    uid: PropTypes.string,
   }).isRequired,
 };
 

@@ -2,9 +2,11 @@ import {
   MESSAGE_CREATE_SUCCESS,
   MESSAGES_FETCH_SUCCESS,
 } from './types';
-import { messagesRef, currentUser } from './database';
+import { messagesRef, auth } from './database';
 
 export const messageCreate = ({ subject, content, productId }) => (dispatch) => {
+  const { currentUser } = auth;
+  // TODO: Error if user not logged in
   messagesRef
     .push({ subject, content, uid: currentUser.uid, product: productId })
     .catch((error) => { console.log(error); })
@@ -18,3 +20,11 @@ export const messagesFetch = () => (dispatch) => {
     });
 };
 
+export const productMessagesFetch = ({ productId }) => (dispatch) => {
+  messagesRef
+    .orderByChild('productId')
+    .equalTo(productId)
+    .on('value', (snapshot) => {
+      dispatch({ type: MESSAGES_FETCH_SUCCESS, payload: snapshot.val() });
+    });
+};

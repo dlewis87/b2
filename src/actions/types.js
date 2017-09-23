@@ -19,3 +19,4 @@ export const CURRENT_PRODUCT_SET = 'current_product_set';
 // Message Actions
 export const MESSAGE_CREATE_SUCCESS = 'message_create_success';
 export const MESSAGES_FETCH_SUCCESS = 'messages_fetch_success';
+export const PRODUCT_MESSAGES_FETCH_SUCCESS = 'product_messages_fetch_success';

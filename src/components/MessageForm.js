@@ -88,11 +88,7 @@ MessageForm.propTypes = {
 const MessageFormRedux = reduxForm({ form: 'MessageForm' })(MessageForm);
 const mapStateToProps = ({ currentProduct }) => {
   if (currentProduct) {
-    return (
-      {
-        product: { uid: currentProduct.uid },
-      }
-    );
+    return ({ product: { uid: currentProduct.uid } });
   }
 
   return {};

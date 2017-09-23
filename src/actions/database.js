@@ -12,11 +12,11 @@ const config = {
 firebase.initializeApp(config);
 
 const database = firebase.database();
-const auth = firebase.auth();
+const ref = database.ref();
 
 // Database refs
-export const messagesRef = database.ref('messages');
-export const productsRef = database.ref('products');
+export const messagesRef = ref.child('messages');
+export const productsRef = ref.child('products');
 
 // Auth Refs
-export const currentUser = auth.currentUser;
+export const auth = firebase.auth();

@@ -22,7 +22,7 @@ export const messagesFetch = () => (dispatch) => {
 
 export const productMessagesFetch = ({ productId }) => (dispatch) => {
   messagesRef
-    .orderByChild('productId')
+    .orderByChild('product')
     .equalTo(productId)
     .on('value', (snapshot) => {
       dispatch({ type: MESSAGES_FETCH_SUCCESS, payload: snapshot.val() });
